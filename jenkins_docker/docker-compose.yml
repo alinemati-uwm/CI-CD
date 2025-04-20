@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  jenkins:
+    build: .
+    image: myjenkins-blueocean:2.492.3-1
+    ports:
+      - "8080:8080"      # Jenkins web UI
+      - "50000:50000"    # Agent connection port
+    volumes:
+      - ~/jenkins_home:/var/jenkins_home       # Persistent Jenkins data
+      - /var/run/docker.sock:/var/run/docker.sock  # Allow Jenkins to use host Docker
+
+volumes:
+  jenkins_home:
